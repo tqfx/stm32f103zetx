@@ -1,0 +1,7 @@
+C_SOURCES += \
+bsp/bsp-delay.c\
+$(wildcard *.c)
+
+C_INCLUDES += \
+-Ibsp\
+-I .
