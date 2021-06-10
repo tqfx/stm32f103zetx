@@ -46,7 +46,9 @@
 
 /* include submodules */
 #include "bsp-delay.h"
+#include "bsp-dma.h"
 #include "bsp-gpio.h"
+#include "bsp-usart.h"
 
 /* Using the operating system */
 #define USED_OS 0

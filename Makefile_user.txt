@@ -1,7 +1,10 @@
 C_SOURCES += \
 bsp/bsp-delay.c\
+bsp/bsp-usart.c\
 $(wildcard *.c)
 
 C_INCLUDES += \
 -Ibsp\
 -I .
+
+LDFLAGS += -u _printf_float

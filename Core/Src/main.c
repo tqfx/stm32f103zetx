@@ -19,7 +19,9 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "dma.h"
 #include "gpio.h"
+#include "usart.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -86,18 +88,40 @@ int main(void)
 
     /* Initialize all configured peripherals */
     MX_GPIO_Init();
+    MX_DMA_Init();
+    MX_USART1_UART_Init();
     /* USER CODE BEGIN 2 */
-
+    gpio_pin_set(LED0_GPIO_Port, LED0_Pin);
+    gpio_pin_set(LED1_GPIO_Port, LED1_Pin);
+    usart_init();
     /* USER CODE END 2 */
 
     /* Infinite loop */
     /* USER CODE BEGIN WHILE */
+
     while (1)
     {
-        delay_ms(500);
-        gpio_pin_toggle(LED0_GPIO_Port, LED0_Pin);
-        delay_ms(500);
-        gpio_pin_toggle(LED1_GPIO_Port, LED1_Pin);
+        delay_ms(2);
+        if (os_buf[0] > 2)
+        {
+            if (os_buf[1] == 't' && os_buf[2] == ':')
+            {
+                if (os_buf[3] == '0')
+                {
+                    gpio_pin_toggle(LED0_GPIO_Port, LED0_Pin);
+                }
+                else if (os_buf[3] == '1')
+                {
+                    gpio_pin_toggle(LED1_GPIO_Port, LED1_Pin);
+                }
+                else if (os_buf[3])
+                {
+                    gpio_pin_toggle(LED0_GPIO_Port, LED0_Pin);
+                    gpio_pin_toggle(LED1_GPIO_Port, LED1_Pin);
+                }
+                os_buf[3] = 0;
+            }
+        }
         /* USER CODE END WHILE */
 
         /* USER CODE BEGIN 3 */
