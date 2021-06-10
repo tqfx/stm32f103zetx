@@ -23,6 +23,7 @@ add_compile_options(
 add_link_options(
     -fdata-sections -ffunction-sections
     -mthumb -mcpu=cortex-m3
+    -u _printf_float
 )
 
 include_directories("Drivers/CMSIS/Include")
