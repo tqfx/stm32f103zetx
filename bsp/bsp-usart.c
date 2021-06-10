@@ -41,8 +41,7 @@ uint8_t *os_buf = *os_buf8;
 
 static va_list ap;
 static float buf32[BUFSIZ32];
-static uint16_t *pn = (uint16_t *)buf32;
-static uint8_t tail[sizeof(float)] = {0x00, 0x00, 0x80, 0x7F};
+static uint8_t *pn = (uint8_t *)buf32;
 
 #define FLAG_TX_DMA (1 << 0)
 #define FLAG_RX_BUF (1 << 1)
@@ -208,22 +207,25 @@ void usart_dma_tx(UART_HandleTypeDef *huart,
 void dma_printf(const char *fmt, ...)
 {
     va_start(ap, fmt);
-    *pn = (uint16_t)vsprintf((char *)(pn + 1U), fmt, ap);
+    uint16_t n = (uint16_t)vsprintf((char *)pn + 2, fmt, ap);
     va_end(ap);
 
-    if (*pn)
+    if (n)
     {
-        uint8_t *p = (uint8_t *)(pn + 1U);
-        uint16_t *buf = (uint16_t *)buf32;
+        uint8_t *p = pn + 2;
+        uint8_t *buf = (uint8_t *)buf32;
+
+        pn[0] = (uint8_t)n;
+        pn[1] = (uint8_t)(n >> 8);
 
         if (pn == buf)
         {
             SET_BIT(flag, FLAG_TX_DMA);
-            usart_dma_tx(&huart_os, p, *pn);
+            usart_dma_tx(&huart_os, p, n);
         }
 
-        pn = (uint16_t *)(p + *pn);
-        if (pn - buf > BUFSIZ16 - 1)
+        pn = p + n;
+        if (pn - buf > BUFSIZ8 - 2)
         {
             pn = buf;
         }
@@ -232,20 +234,21 @@ void dma_printf(const char *fmt, ...)
 
 static void dma_printf_irq(void)
 {
-    static uint16_t *pi = (uint16_t *)buf32;
+    static uint8_t *pi = (uint8_t *)buf32;
 
-    uint16_t *p = (uint16_t *)((uint8_t *)(pi + 1U) + *pi);
+    uint16_t n = (uint16_t)(pi[0] + ((uint16_t)pi[1] << 8));
+    uint8_t *p = pi + 2 + n;
 
-    *pi = 0;
+    pi[0] = pi[1] = 0;
     if (p < pn)
     {
         pi = p;
         SET_BIT(flag, FLAG_TX_DMA);
-        usart_dma_tx(&huart_os, (uint8_t *)(p + 1U), *p);
+        usart_dma_tx(&huart_os, p + 2, n);
     }
     else
     {
-        pi = pn = (uint16_t *)buf32;
+        pi = pn = (uint8_t *)buf32;
         CLEAR_BIT(flag, FLAG_TX_DMA);
     }
 }
@@ -330,7 +333,7 @@ void os_justfloat(uint8_t n, ...)
     {
         *p++ = (float)va_arg(ap, double);
     }
-    *p = *(float *)tail;
+    *p = 1.0F / 0.0F;
     va_end(ap);
 
     /* USART transmit by DMA Stream */
