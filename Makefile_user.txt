@@ -1,5 +1,6 @@
 C_SOURCES += \
 bsp/bsp-delay.c\
+bsp/bsp-flash.c\
 bsp/bsp-usart.c\
 $(wildcard *.c)
 

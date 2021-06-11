@@ -99,6 +99,17 @@ int main(void)
     /* Infinite loop */
     /* USER CODE BEGIN WHILE */
 
+    HAL_StatusTypeDef status;
+
+    flash_erase(FLASH_PAGE31, 1);
+    status = flash_writen(FLASH_PAGE31, FLASH_PAGE_END, "1234567890", 10);
+    os_printf("%u\r\n", status);
+    char buff[10];
+    flash_read(FLASH_PAGE31, buff, 10);
+    usart_dma_tx(&huart_os, buff, 10);
+
+    os_printf("\n%X\n", flash_page_next(FLASH_PAGE_END));
+
     while (1)
     {
         delay_ms(2);

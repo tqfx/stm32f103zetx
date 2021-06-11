@@ -47,6 +47,7 @@
 /* include submodules */
 #include "bsp-delay.h"
 #include "bsp-dma.h"
+#include "bsp-flash.h"
 #include "bsp-gpio.h"
 #include "bsp-usart.h"
 
