@@ -161,7 +161,7 @@ void usart_dma_init(UART_HandleTypeDef *huart)
 }
 
 void usart_dma_rx(UART_HandleTypeDef *huart,
-                  uint8_t *buf,
+                  void *buf,
                   uint16_t len)
 {
     do
@@ -183,7 +183,7 @@ void usart_dma_rx(UART_HandleTypeDef *huart,
 }
 
 void usart_dma_tx(UART_HandleTypeDef *huart,
-                  uint8_t *data,
+                  void *data,
                   uint16_t len)
 {
     do

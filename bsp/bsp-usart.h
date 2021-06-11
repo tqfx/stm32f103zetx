@@ -99,7 +99,7 @@ extern void usart_dma_init(UART_HandleTypeDef *huart);
  @param[in]      len: DMA stream x number of data register
 */
 extern void usart_dma_rx(UART_HandleTypeDef *huart,
-                         uint8_t *buf,
+                         void *buf,
                          uint16_t len);
 
 /*!
@@ -109,7 +109,7 @@ extern void usart_dma_rx(UART_HandleTypeDef *huart,
  @param[in]      len: the length of data
 */
 extern void usart_dma_tx(UART_HandleTypeDef *huart,
-                         uint8_t *data,
+                         void *data,
                          uint16_t len);
 
 /*!
