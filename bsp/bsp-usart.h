@@ -1,9 +1,9 @@
 /*!
  @file           bsp-usart.h
- @brief          bsp fo usart
+ @brief          bsp for usart
  @author         tqfx tqfx@foxmail.com
  @version        0
- @date           2021-06-10
+ @date           2021-06-11
  @copyright      Copyright (C) 2021 tqfx
  \n \n
  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -46,105 +46,90 @@ extern uint8_t *os_buf;
 
 __BEGIN_DECLS
 
-/**
- * @brief        Disable USART
- * @param[in]    huart: UART handle Structure pointer
+/*!
+ @brief          Disable USART
+ @param[in]      huart: UART handle Structure pointer
 */
 extern void usart_disable(UART_HandleTypeDef *huart);
 
-/**
- * @brief        Enable USART
- * @param[in]    huart: UART handle Structure pointer
+/*!
+ @brief          Enable USART
+ @param[in]      huart: UART handle Structure pointer
 */
 extern void usart_enable(UART_HandleTypeDef *huart);
 
-/**
- * @brief        Restart USART DMA receiver
- * @param[in]    huart: UART handle Structure pointer
- * @param[in]    len:   the length of data
+/*!
+ @brief          Restart USART DMA receiver
+ @param[in]      huart: UART handle Structure pointer
+ @param[in]      len: the length of data
 */
 extern void usart_dma_rerx(UART_HandleTypeDef *huart,
                            uint16_t len);
 
-/**
- * @brief        Restart USART DMA transmit
- * @param[in]    huart: UART handle Structure pointer
- * @param[in]    len:   the length of data
+/*!
+ @brief          Restart USART DMA transmit
+ @param[in]      huart: UART handle Structure pointer
+ @param[in]      len: the length of data
 */
 extern void usart_dma_retx(UART_HandleTypeDef *huart,
                            uint16_t len);
 
-/**
- * @brief        Initializes USART DMA receiver
- * @param[in]    huart: UART handle Structure pointer
+/*!
+ @brief          Initializes USART DMA receiver
+ @param[in]      huart: UART handle Structure pointer
 */
 extern void usart_dma_rx_init(UART_HandleTypeDef *huart);
 
-/**
- * @brief        Initializes USART DMA transmit
- * @param[in]    huart: UART handle Structure pointer
+/*!
+ @brief          Initializes USART DMA transmit
+ @param[in]      huart: UART handle Structure pointer
 */
 extern void usart_dma_tx_init(UART_HandleTypeDef *huart);
 
-/**
- * @brief        Initializes USART DMA receiver and transmit
- * @param[in]    huart: UART handle Structure pointer
+/*!
+ @brief          Initializes USART DMA receiver and transmit
+ @param[in]      huart: UART handle Structure pointer
 */
 extern void usart_dma_init(UART_HandleTypeDef *huart);
 
-/**
- * @brief        Enable double memory buffer
- * @param[in]    huart: UART handle Structure pointer
- * @param[in]    buf:   DMA stream x memory 0 address register
- * @param[in]    len:   DMA stream x number of data register
+/*!
+ @brief          Enable double memory buffer
+ @param[in]      huart: UART handle Structure pointer
+ @param[in]      buf: DMA stream x memory 0 address register
+ @param[in]      len: DMA stream x number of data register
 */
 extern void usart_dma_rx(UART_HandleTypeDef *huart,
                          uint8_t *buf,
                          uint16_t len);
 
-/**
- * @brief        USART transmit by DMA Stream
- * @param[in]    huart: UART handle Structure pointer
- * @param[in]    data:  the address of data
- * @param[in]    len:   the length of data
+/*!
+ @brief          USART transmit by DMA Stream
+ @param[in]      huart: UART handle Structure pointer
+ @param[in]      data: the address of data
+ @param[in]      len: the length of data
 */
 extern void usart_dma_tx(UART_HandleTypeDef *huart,
                          uint8_t *data,
                          uint16_t len);
 
+/*!
+ @brief          print string to USART
+ @param[in]      format: printf format
+*/
 extern void dma_printf(const char *fmt, ...);
 
-/**
- * @brief        print string to USART
- * @param[in]    format: printf format
+/*!
+ @brief          print string to USART
+ @param[in]      format: printf format
 */
 extern void os_printf(const char *format, ...);
 
-/**
- * @brief        print float data to USART by little-endian mode
- * @param[in]    n: number of float data
- * @param[in]    ...: float data
+/*!
+ @brief          print float data to USART by little-endian mode
+ @param[in]      n: number of float data
+ @param[in]      ...: float data
 */
 extern void os_justfloat(uint8_t n, ...);
-
-/**
- * @brief        push float data to buffer by little-endian mode
- * @param[in]    f: float data
-*/
-extern void os_pushf(float f);
-
-/**
- * @brief        print float and tail data to USART by little-endian mode
-*/
-extern void os_tail(void);
-
-/**
- * @brief        print float to USART
- * @param[in]    x: float number
- * @param[in]    l: float number
-*/
-extern void os_putf(float x,
-                    uint8_t l);
 
 __END_DECLS
 

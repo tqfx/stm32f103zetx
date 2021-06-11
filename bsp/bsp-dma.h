@@ -1,6 +1,6 @@
 /*!
  @file           bsp-dma.h
- @brief          bsp fo dma
+ @brief          bsp for dma
  @author         tqfx tqfx@foxmail.com
  @version        0
  @date           2021-06-10

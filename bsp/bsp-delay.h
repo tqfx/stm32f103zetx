@@ -1,6 +1,6 @@
 /*!
  @file           bsp-delay.h
- @brief          bsp fo delay
+ @brief          bsp for delay
  @author         tqfx tqfx@foxmail.com
  @version        0
  @date           2021-06-10

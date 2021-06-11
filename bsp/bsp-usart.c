@@ -1,6 +1,6 @@
 /*!
  @file           bsp-usart.c
- @brief          bsp fo usart
+ @brief          bsp for usart
  @author         tqfx tqfx@foxmail.com
  @version        0
  @date           2021-06-10
