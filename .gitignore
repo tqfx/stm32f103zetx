@@ -51,8 +51,19 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
-# build
+# STM32CobeMX
 build
+.mxproject
 
 # VSCode
 .vscode
+
+# Doxygen
+html
+latex
+
+# Keil
+*.lst
+MDK-ARM/*.uvguix.*
+MDK-ARM/DebugConfig
+MDK-ARM/stm32f103zetx

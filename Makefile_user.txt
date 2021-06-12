@@ -1,11 +1,20 @@
-C_SOURCES += \
-bsp/bsp-delay.c\
-bsp/bsp-flash.c\
-bsp/bsp-usart.c\
-$(wildcard *.c)
-
-C_INCLUDES += \
--Ibsp\
--I .
-
+CFLAGS += -Wextra
+CFLAGS += -Wpedantic
+CFLAGS += -Wunused
+CFLAGS += -Wundef
+CFLAGS += -Winline
+CFLAGS += -Wshadow
+CFLAGS += -Wconversion
+CFLAGS += -Wfloat-equal
+CFLAGS += -Wswitch-enum
+CFLAGS += -Wswitch-default
+CFLAGS += -Wdouble-promotion
 LDFLAGS += -u _printf_float
+C_SOURCES += $(wildcard *.c)
+C_INCLUDES += -I .
+
+C_SOURCES += bsp/bsp-delay.c
+C_SOURCES += bsp/bsp-flash.c
+C_SOURCES += bsp/bsp-usart.c
+
+C_INCLUDES += -Ibsp
