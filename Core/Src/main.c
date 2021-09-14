@@ -20,8 +20,8 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "dma.h"
-#include "gpio.h"
 #include "usart.h"
+#include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -90,6 +90,7 @@ int main(void)
     MX_GPIO_Init();
     MX_DMA_Init();
     MX_USART1_UART_Init();
+    MX_USART2_UART_Init();
     /* USER CODE BEGIN 2 */
     gpio_pin_set(LED0_GPIO_Port, LED0_Pin);
     gpio_pin_set(LED1_GPIO_Port, LED1_Pin);
@@ -98,42 +99,9 @@ int main(void)
 
     /* Infinite loop */
     /* USER CODE BEGIN WHILE */
-
-    HAL_StatusTypeDef status;
-
-    status = flash_erase(FLASH_PAGE255, 1);
-    os_printf("%u\r\n", status);
-    status = flash_writen(FLASH_PAGE255, FLASH_PAGE_END, "1234567890", 10);
-    os_printf("%u\r\n", status);
-    char buff[10];
-    flash_read(FLASH_PAGE255, buff, 10);
-    usart_dma_tx(&huart_os, buff, 10);
-
-    os_printf("\n%X\n", flash_page_next(FLASH_PAGE_END));
-
+    os_printf("ok\r\n");
     while (1)
     {
-        delay_ms(2);
-        if (os_buf[0] > 2)
-        {
-            if (os_buf[1] == 't' && os_buf[2] == ':')
-            {
-                if (os_buf[3] == '0')
-                {
-                    gpio_pin_toggle(LED0_GPIO_Port, LED0_Pin);
-                }
-                else if (os_buf[3] == '1')
-                {
-                    gpio_pin_toggle(LED1_GPIO_Port, LED1_Pin);
-                }
-                else if (os_buf[3])
-                {
-                    gpio_pin_toggle(LED0_GPIO_Port, LED0_Pin);
-                    gpio_pin_toggle(LED1_GPIO_Port, LED1_Pin);
-                }
-                os_buf[3] = 0;
-            }
-        }
         /* USER CODE END WHILE */
 
         /* USER CODE BEGIN 3 */

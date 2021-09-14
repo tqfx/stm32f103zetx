@@ -1,3 +1,6 @@
 [submodule "cmake"]
 	path = cmake
 	url = https://hub.fastgit.org/tqfx/cmake.git
+[submodule "scripts"]
+	path = scripts
+	url = https://github.com/tqfx/stm32-scripts.git

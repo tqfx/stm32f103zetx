@@ -1,5 +1,5 @@
 /*!
- @file           bsp-flash.h
+ @file           bsp_flash.h
  @brief          bsp for flash
  @author         tqfx tqfx@foxmail.com
  @version        0

@@ -1,5 +1,5 @@
 /*!
- @file           bsp-dma.h
+ @file           bsp_dma.h
  @brief          bsp for dma
  @author         tqfx tqfx@foxmail.com
  @version        0

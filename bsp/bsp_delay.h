@@ -1,5 +1,5 @@
 /*!
- @file           bsp-delay.h
+ @file           bsp_delay.h
  @brief          bsp for delay
  @author         tqfx tqfx@foxmail.com
  @version        0

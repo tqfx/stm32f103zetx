@@ -1,7 +1,7 @@
 CFLAGS += -Wextra
 CFLAGS += -Wpedantic
-CFLAGS += -Wunused
 CFLAGS += -Wundef
+CFLAGS += -Wunused
 CFLAGS += -Winline
 CFLAGS += -Wshadow
 CFLAGS += -Wconversion
@@ -9,12 +9,12 @@ CFLAGS += -Wfloat-equal
 CFLAGS += -Wswitch-enum
 CFLAGS += -Wswitch-default
 CFLAGS += -Wdouble-promotion
-LDFLAGS += -u _printf_float
-C_SOURCES += $(wildcard *.c)
 C_INCLUDES += -I .
+C_SOURCES += $(wildcard *.c)
+LDFLAGS += -u _printf_float
 
-C_SOURCES += bsp/bsp-delay.c
-C_SOURCES += bsp/bsp-flash.c
-C_SOURCES += bsp/bsp-usart.c
+C_SOURCES += bsp/bsp_delay.c
+C_SOURCES += bsp/bsp_flash.c
+C_SOURCES += bsp/bsp_usart.c
 
 C_INCLUDES += -Ibsp

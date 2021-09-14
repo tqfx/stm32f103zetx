@@ -1,5 +1,5 @@
 /*!
- @file           bsp-flash.c
+ @file           bsp_flash.c
  @brief          bsp for flash
  @author         tqfx tqfx@foxmail.com
  @version        0
@@ -25,7 +25,7 @@
  SOFTWARE.
 */
 
-#include "bsp-flash.h"
+#include "bsp_flash.h"
 
 #include "main.h"
 

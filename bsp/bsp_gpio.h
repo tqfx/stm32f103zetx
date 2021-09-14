@@ -1,5 +1,5 @@
 /*!
- @file           bsp-gpio.h
+ @file           bsp_gpio.h
  @brief          bsp for gpio
  @author         tqfx tqfx@foxmail.com
  @version        0

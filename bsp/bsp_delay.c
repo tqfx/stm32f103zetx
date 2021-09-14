@@ -1,5 +1,5 @@
 /*!
- @file           bsp-delay.c
+ @file           bsp_delay.c
  @brief          bsp fo delay
  @author         tqfx tqfx@foxmail.com
  @version        0
@@ -25,7 +25,7 @@
  SOFTWARE.
 */
 
-#include "bsp-delay.h"
+#include "bsp_delay.h"
 
 #include "main.h"
 

@@ -45,11 +45,11 @@
 #endif /* __cplusplus */
 
 /* include submodules */
-#include "bsp-delay.h"
-#include "bsp-dma.h"
-#include "bsp-flash.h"
-#include "bsp-gpio.h"
-#include "bsp-usart.h"
+#include "bsp_delay.h"
+#include "bsp_dma.h"
+#include "bsp_flash.h"
+#include "bsp_gpio.h"
+#include "bsp_usart.h"
 
 /* Using the operating system */
 #define USED_OS 0

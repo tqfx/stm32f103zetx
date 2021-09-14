@@ -1,5 +1,5 @@
 /*!
- @file           bsp-usart.h
+ @file           bsp_usart.h
  @brief          bsp for usart
  @author         tqfx tqfx@foxmail.com
  @version        0

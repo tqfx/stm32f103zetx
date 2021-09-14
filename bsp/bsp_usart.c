@@ -1,5 +1,5 @@
 /*!
- @file           bsp-usart.c
+ @file           bsp_usart.c
  @brief          bsp for usart
  @author         tqfx tqfx@foxmail.com
  @version        0
@@ -25,7 +25,7 @@
  SOFTWARE.
 */
 
-#include "bsp-usart.h"
+#include "bsp_usart.h"
 
 #include "main.h"
 
@@ -45,6 +45,7 @@ static uint8_t *pn = (uint8_t *)buf32;
 
 #define FLAG_TX_DMA (1 << 0)
 #define FLAG_RX_BUF (1 << 1)
+#define FLAG_TX     (1 << 2)
 static int8_t flag = 0x00;
 
 void usart_disable(UART_HandleTypeDef *huart)
@@ -262,15 +263,6 @@ void PC_IRQHandler(void)
     {
         __HAL_UART_CLEAR_PEFLAG(&huart_os); /* Clears the UART PE pending flag */
     }
-    else if (huart_os.Instance->SR & UART_FLAG_TC)
-    {
-        __HAL_UART_CLEAR_FLAG(&huart_os, UART_FLAG_TC);
-
-        if (READ_BIT(flag, FLAG_TX_DMA))
-        {
-            dma_printf_irq();
-        }
-    }
     else if (huart_os.Instance->SR & UART_FLAG_IDLE)
     {
         __HAL_UART_CLEAR_PEFLAG(&huart_os); /* Clears the UART PE pending flag */
@@ -306,6 +298,15 @@ void PC_IRQHandler(void)
             SET_BIT(flag, FLAG_RX_BUF);
 
             __HAL_DMA_ENABLE(huart_os.hdmarx);
+        }
+    }
+    else if (huart_os.Instance->SR & UART_FLAG_TC)
+    {
+        __HAL_UART_CLEAR_FLAG(&huart_os, UART_FLAG_TC);
+
+        if (READ_BIT(flag, FLAG_TX_DMA))
+        {
+            dma_printf_irq();
         }
     }
 }

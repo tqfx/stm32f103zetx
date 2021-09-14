@@ -1,10 +1,12 @@
-include(cmake/cmake-arm-none-eabi.cmake)
+include(cmake/arm-none-eabi.cmake)
 
 cmake_minimum_required(VERSION 3.10)
 
 project(stm32f103zetx)
 
 set(CMAKE_VERBOSE_MAKEFILE OFF)
+set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
+set(ARICHIVE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
 
 if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE "Debug")
@@ -12,18 +14,19 @@ endif(NOT CMAKE_BUILD_TYPE)
 set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -Og -ggdb -gdwarf-2")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Og -ggdb -gdwarf-2")
 
-include(cmake/cmake-flags.cmake)
+include(cmake/check-flag.cmake)
+
 add_compile_definitions(
-    USE_HAL_DRIVER STM32F103xE
+  USE_HAL_DRIVER STM32F103xE
 )
 add_compile_options(
-    -fdata-sections -ffunction-sections
-    -mthumb -mcpu=cortex-m3
+  -fdata-sections -ffunction-sections
+  -mthumb -mcpu=cortex-m3
 )
 add_link_options(
-    -fdata-sections -ffunction-sections
-    -mthumb -mcpu=cortex-m3
-    -u _printf_float
+  -fdata-sections -ffunction-sections
+  -mthumb -mcpu=cortex-m3
+  -u _printf_float
 )
 
 include_directories("Drivers/CMSIS/Include")
@@ -60,30 +63,30 @@ add_executable(${CMAKE_PROJECT_NAME}.elf ${STARTUP} ${SOURCE})
 
 target_link_libraries(${CMAKE_PROJECT_NAME}.elf c m nosys)
 
-file(GLOB LINKER_SCRIPT  *.ld)
+file(GLOB LINKER_SCRIPT *.ld)
 target_link_options(${CMAKE_PROJECT_NAME}.elf PUBLIC
-    -Wl,--gc-sections
-    --specs=nano.specs
-    -T${LINKER_SCRIPT}
-    -Wl,-Map=${CMAKE_PROJECT_NAME}.map,--cref
+  -Wl,--gc-sections
+  --specs=nano.specs
+  -T${LINKER_SCRIPT}
+  -Wl,-Map=${CMAKE_PROJECT_NAME}.map,--cref
 )
 
 # display the size of the output binary after a build is finished
 add_custom_command(TARGET ${CMAKE_PROJECT_NAME}.elf POST_BUILD
-    COMMAND ${CMAKE_SIZE} --format=berkeley ${CMAKE_PROJECT_NAME}.elf
+  COMMAND ${CMAKE_SIZE} --format=berkeley ${CMAKE_PROJECT_NAME}.elf
 )
 add_custom_target(${CMAKE_PROJECT_NAME}.hex ALL DEPENDS ${CMAKE_PROJECT_NAME}.elf
-    COMMAND ${CMAKE_OBJCOPY} -Oihex ${CMAKE_PROJECT_NAME}.elf ${CMAKE_PROJECT_NAME}.hex
+  COMMAND ${CMAKE_OBJCOPY} -Oihex ${CMAKE_PROJECT_NAME}.elf ${CMAKE_PROJECT_NAME}.hex
 )
 add_custom_target(${CMAKE_PROJECT_NAME}.bin ALL DEPENDS ${CMAKE_PROJECT_NAME}.elf
-    COMMAND ${CMAKE_OBJCOPY} -Obinary ${CMAKE_PROJECT_NAME}.elf ${CMAKE_PROJECT_NAME}.bin
+  COMMAND ${CMAKE_OBJCOPY} -Obinary ${CMAKE_PROJECT_NAME}.elf ${CMAKE_PROJECT_NAME}.bin
 )
 
 # openocd
 file(GLOB FLASH_CONFIG *.cfg)
 add_custom_target(flash
-    COMMAND openocd -f ${FLASH_CONFIG} -c init -c halt -c \"program ${CMAKE_PROJECT_NAME}.elf verify reset exit\"
+  COMMAND openocd -f ${FLASH_CONFIG} -c init -c halt -c \"program ${CMAKE_PROJECT_NAME}.elf verify reset exit\"
 )
 add_custom_target(reset
-    COMMAND openocd -f ${FLASH_CONFIG} -c init -c halt -c reset -c shutdown
+  COMMAND openocd -f ${FLASH_CONFIG} -c init -c halt -c reset -c shutdown
 )
