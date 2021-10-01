@@ -2,7 +2,7 @@ include(cmake/arm-none-eabi.cmake)
 
 cmake_minimum_required(VERSION 3.10)
 
-project(stm32f103zetx)
+project(target)
 
 set(CMAKE_VERBOSE_MAKEFILE OFF)
 set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
@@ -16,35 +16,20 @@ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Og -ggdb -gdwarf-2")
 
 include(cmake/check-flag.cmake)
 
-add_compile_definitions(
-  USE_HAL_DRIVER STM32F103xE
-)
-add_compile_options(
-  -fdata-sections -ffunction-sections
-  -mthumb -mcpu=cortex-m3
-)
-add_link_options(
-  -fdata-sections -ffunction-sections
-  -mthumb -mcpu=cortex-m3
-  -u _printf_float
-)
+add_compile_definitions(STM32F103xE)
+add_compile_definitions(USE_HAL_DRIVER)
 
-include_directories("Drivers/CMSIS/Include")
-include_directories("Drivers/CMSIS/Device/ST/STM32F1xx/Include")
-include_directories("Drivers/STM32F1xx_HAL_Driver/Inc/Legacy")
-include_directories("Drivers/STM32F1xx_HAL_Driver/Inc")
-aux_source_directory("Drivers/STM32F1xx_HAL_Driver/Src" SOURCE_Drivers)
+list(APPEND OPTIONS -mcpu=cortex-m3)
+list(APPEND OPTIONS -mthumb -fdata-sections -ffunction-sections)
+add_compile_options(${OPTIONS})
+add_link_options(${OPTIONS})
+# add_link_options(-u_printf_float)
+
+include(Drivers/FileLists.cmake)
 list(APPEND SOURCE ${SOURCE_Drivers})
 
-#include_directories("Middlewares/Third_Party/FreeRTOS/Source/include")
-#include_directories("Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2")
-#include_directories("Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F")
-# aux_source_directory("Middlewares/Third_Party/FreeRTOS/Source" SOURCE_Middlewares)
-# list(APPEND SOURCE_Middlewares "Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.c")
-# list(APPEND SOURCE_Middlewares "Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c")
-# list(APPEND SOURCE_Middlewares "Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/port.c")
-#file(GLOB_RECURSE SOURCE_Middlewares Middlewares/*.c)
-#list(APPEND SOURCE ${SOURCE_Middlewares})
+include(Middlewares/FileLists.cmake)
+list(APPEND SOURCE ${SOURCE_Middlewares})
 
 include_directories("Core/Inc")
 aux_source_directory("Core/Src" SOURCE_Core)
@@ -54,11 +39,7 @@ include_directories("bsp")
 aux_source_directory("bsp" SOURCE_bsp)
 list(APPEND SOURCE ${SOURCE_bsp})
 
-#include_directories("application")
-#aux_source_directory("application" SOURCE_application)
-#list(APPEND SOURCE ${SOURCE_application})
-
-file(GLOB STARTUP *.s)
+file(GLOB STARTUP startup*.s)
 add_executable(${CMAKE_PROJECT_NAME}.elf ${STARTUP} ${SOURCE})
 
 target_link_libraries(${CMAKE_PROJECT_NAME}.elf c m nosys)
