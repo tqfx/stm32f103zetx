@@ -18,9 +18,10 @@ CFLAGS += -Wdouble-promotion
 # C defines
 C_DEFS +=
 # C includes
-C_INCLUDES +=
+C_INCLUDES += -Itimeslice/src
 # C sources
-C_SOURCES += $(wildcard *.c)
+C_SOURCES += Core/Src/exec.c
+C_SOURCES += $(wildcard timeslice/src/*.c)
 # AS defines
 AS_DEFS +=
 # ASM sources
