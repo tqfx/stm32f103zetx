@@ -142,6 +142,8 @@ LIBS = -lc -lm -lnosys
 LIBDIR = 
 LDFLAGS = $(MCU) -specs=nano.specs -T$(LDSCRIPT) $(LIBDIR) $(LIBS) -Wl,-Map=$(BUILD_DIR)/$(TARGET).map,--cref -Wl,--gc-sections
 
+-include make.mk
+
 # default action: build all
 all: $(BUILD_DIR)/$(TARGET).elf $(BUILD_DIR)/$(TARGET).hex $(BUILD_DIR)/$(TARGET).bin
 
@@ -187,3 +189,7 @@ clean:
 -include $(wildcard $(BUILD_DIR)/*.d)
 
 # *** EOF ***
+flash:
+	openocd -f scripts/openocd.cfg -c init -c halt -c "program $(BUILD_DIR)/$(TARGET).elf verify reset exit"
+reset:
+	openocd -f scripts/openocd.cfg -c init -c halt -c reset -c shutdown
