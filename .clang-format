@@ -22,7 +22,6 @@ BraceWrapping:
   AfterFunction: true
   AfterCaseLabel: true
   AfterNamespace: true
-  AfterExternBlock: false
   AfterControlStatement: true
   BeforeElse: true
   BeforeCatch: true
@@ -31,12 +30,10 @@ BraceWrapping:
   SplitEmptyNamespace: false
 ColumnLimit: 0
 IndentWidth: 4
-KeepEmptyLinesAtTheStartOfBlocks: false
 NamespaceIndentation: All
 ObjCBlockIndentWidth: 4
 ReflowComments: false
 SortIncludes: false
-SpaceBeforeCpp11BracedList: true
 SpaceBeforeCtorInitializerColon: false
 SpaceBeforeInheritanceColon: false
 SpacesInContainerLiterals: false
