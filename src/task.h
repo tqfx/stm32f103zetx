@@ -16,6 +16,9 @@ typedef enum task_e
     TASK_CTRL = 0x00FF,
     TASK_LOAD = 1 << 0,
     TASK_EXEC = 1 << 7,
+    TASK_TYPE = 0xFF00,
+    TASK_CRON = 1 << 8,
+    TASK_ONCE = 1 << 9,
 } task_e;
 
 #ifndef _MSC_VER
@@ -44,7 +47,7 @@ extern "C" {
 void task_tick(void);
 void task_exec(void);
 void task_cron(task_s *ctx, void (*exec)(void *), void *argv, size_t slice);
-void task_once(task_s *ctx, void (*exec)(void *), void *argv, size_t timer);
+void task_once(task_s *ctx, void (*exec)(void *), void *argv, size_t delay);
 void task_set_exec(task_s *ctx, void (*exec)(void *));
 void task_set_argv(task_s *ctx, void *argv);
 void task_set_timer(task_s *ctx, size_t timer);

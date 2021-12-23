@@ -38,7 +38,7 @@ void task_exec(void)
         {
             task_current->exec(task_current->argv);
             task_current->state &= ~TASK_EXEC;
-            if (task_current->slice == 0)
+            if (task_current->state & TASK_ONCE)
             {
                 task_del(task_current);
             }
@@ -49,17 +49,16 @@ void task_exec(void)
 void task_cron(task_s *ctx, void (*exec)(void *), void *argv, size_t slice)
 {
     ctx->timer = ctx->slice = slice;
-    ctx->state = TASK_NULL;
+    ctx->state = TASK_CRON;
     list2_ctor(ctx->list);
     ctx->exec = exec;
     ctx->argv = argv;
 }
 
-void task_once(task_s *ctx, void (*exec)(void *), void *argv, size_t timer)
+void task_once(task_s *ctx, void (*exec)(void *), void *argv, size_t delay)
 {
-    ctx->slice = 0;
-    ctx->timer = timer;
-    ctx->state = TASK_NULL;
+    ctx->timer = ctx->slice = delay;
+    ctx->state = TASK_ONCE;
     list2_ctor(ctx->list);
     ctx->exec = exec;
     ctx->argv = argv;
