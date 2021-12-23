@@ -49,11 +49,11 @@ static void task5_exec(void *arg)
 static size_t ref[5] = {0};
 static void task_ctor(void)
 {
-    task_ctor(task + 1, task1_exec, ref, 10);
-    task_ctor(task + 2, task2_exec, ref, 20);
-    task_ctor(task + 3, task3_exec, ref, 30);
-    task_ctor(task + 4, task4_exec, ref, 40);
-    task_ctor(task + 5, task5_exec, ref, 50);
+    task_cron(task + 1, task1_exec, ref, 10);
+    task_cron(task + 2, task2_exec, ref, 20);
+    task_cron(task + 3, task3_exec, ref, 30);
+    task_cron(task + 4, task4_exec, ref, 40);
+    task_cron(task + 5, task5_exec, ref, 50);
     task_add(task + 1);
     task_add(task + 2);
     task_add(task + 3);
