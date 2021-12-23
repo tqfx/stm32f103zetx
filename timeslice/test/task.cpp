@@ -17,6 +17,7 @@ static void task1_exec(void *arg)
     if (++*p % 2 == 0)
     {
         task_del(task + 1);
+        task_del(task + 1);
     }
 }
 
@@ -25,6 +26,7 @@ static void task2_exec(void *arg)
     size_t *p = (size_t *)arg + 1;
     if (++*p % 2 == 0)
     {
+        task_add(task + 1);
         task_add(task + 1);
     }
 }
