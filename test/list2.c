@@ -17,6 +17,30 @@ typedef struct list_int_s
 } list_int_s;
 #pragma pack(pop)
 
+static size_t list2_len(const list2_s *list)
+{
+    size_t count = 0;
+    const list2_s *p;
+    if (list)
+    {
+        if (list != list->tail)
+        {
+            list2_for_tail(p, list)
+            {
+                ++count;
+            }
+        }
+        else if (list != list->head)
+        {
+            list2_for_head(p, list)
+            {
+                ++count;
+            }
+        }
+    }
+    return count;
+}
+
 static void test_tail(void)
 {
     list2_s *list = (list2_s *)malloc(sizeof(list2_s));
@@ -122,7 +146,7 @@ static void test_func(void)
     list_int_s *tmp = (list_int_s *)malloc(sizeof(list_int_s));
     tmp->data = -1;
     list2_s *p = list2->head;
-    list2_replace_node(list2->head, tmp->list);
+    list2_sub_node(list2->head, tmp->list);
     tmp = list2_entry(p, list_int_s, list);
     list2_swap_node(list2->head, list2->tail);
     list2_for_tail(p, list1)
@@ -168,36 +192,37 @@ static void test_null(void)
     len = list2_len(list1) + list2_len(list2);
     if (len != 0)
     {
-        printf("failure in %s %i\n", __FILE__, __LINE__);
+        printf("failure in %s %i %zu\n", __FILE__, __LINE__, len);
     }
 
     list2_add_tail(list1, list1);
     len = list2_len(list1) + list2_len(list2);
     if (len != 0)
     {
-        printf("failure in %s %i\n", __FILE__, __LINE__);
+        printf("failure in %s %i %zu\n", __FILE__, __LINE__, len);
     }
 
     list2_add_head(list1, list2);
     len = list2_len(list1) + list2_len(list2);
     if (len != 2)
     {
-        printf("failure in %s %i\n", __FILE__, __LINE__);
+        printf("failure in %s %i %zu\n", __FILE__, __LINE__, len);
     }
 
     list2_add_tail(list1, list2);
     len = list2_len(list1) + list2_len(list2);
     if (len != 2)
     {
-        printf("failure in %s %i\n", __FILE__, __LINE__);
+        printf("failure in %s %i %zu\n", __FILE__, __LINE__, len);
     }
 
     list2_del_node(list1);
     list2_del_node(list1);
+    list2_ctor(list1);
     len = list2_len(list1) + list2_len(list2);
     if (len != 0)
     {
-        printf("failure in %s %i\n", __FILE__, __LINE__);
+        printf("failure in %s %i %zu\n", __FILE__, __LINE__, len);
     }
 
     list2_rot_head(list1);
@@ -205,7 +230,7 @@ static void test_null(void)
     len = list2_len(list1) + list2_len(list2);
     if (len != 0)
     {
-        printf("failure in %s %i\n", __FILE__, __LINE__);
+        printf("failure in %s %i %zu\n", __FILE__, __LINE__, len);
     }
 
     list2_link(list1, list2);
@@ -213,7 +238,7 @@ static void test_null(void)
     len = list2_len(list1) + list2_len(list2);
     if (len != 2)
     {
-        printf("failure in %s %i\n", __FILE__, __LINE__);
+        printf("failure in %s %i %zu\n", __FILE__, __LINE__, len);
     }
 
     list2_rot_head(list1);
@@ -222,7 +247,7 @@ static void test_null(void)
     len = list2_len(list1) + list2_len(list2);
     if (len != 2)
     {
-        printf("failure in %s %i\n", __FILE__, __LINE__);
+        printf("failure in %s %i %zu\n", __FILE__, __LINE__, len);
     }
 
     list2_swap_node(list1, list1);
@@ -230,36 +255,37 @@ static void test_null(void)
     len = list2_len(list1) + list2_len(list2);
     if (len != 2)
     {
-        printf("failure in %s %i\n", __FILE__, __LINE__);
+        printf("failure in %s %i %zu\n", __FILE__, __LINE__, len);
     }
 
     list2_swap_node(list1, list2);
     len = list2_len(list1) + list2_len(list2);
     if (len != 0)
     {
-        printf("failure in %s %i\n", __FILE__, __LINE__);
+        printf("failure in %s %i %zu\n", __FILE__, __LINE__, len);
     }
 
     list2_swap_node(list2, list1);
     len = list2_len(list1) + list2_len(list2);
     if (len != 2)
     {
-        printf("failure in %s %i\n", __FILE__, __LINE__);
+        printf("failure in %s %i %zu\n", __FILE__, __LINE__, len);
     }
 
-    list2_replace_node(list1, list1);
-    list2_replace_node(list2, list2);
+    list2_sub_node(list1, list1);
+    list2_sub_node(list2, list2);
     len = list2_len(list1) + list2_len(list2);
     if (len != 2)
     {
-        printf("failure in %s %i\n", __FILE__, __LINE__);
+        printf("failure in %s %i %zu\n", __FILE__, __LINE__, len);
     }
 
-    list2_replace_node(list2, list1);
+    list2_sub_node(list2, list1);
+    list2_ctor(list2);
     len = list2_len(list1) + list2_len(list2);
     if (len != 0)
     {
-        printf("failure in %s %i\n", __FILE__, __LINE__);
+        printf("failure in %s %i %zu\n", __FILE__, __LINE__, len);
     }
 }
 

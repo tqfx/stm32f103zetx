@@ -12,8 +12,10 @@
 
 typedef enum task_e
 {
-    TASK_EXEC = 1,
-    TASK_WAIT = 2,
+    TASK_NULL = 0,
+    TASK_CTRL = 0x00FF,
+    TASK_LOAD = 1 << 0,
+    TASK_EXEC = 1 << 7,
 } task_e;
 
 #ifndef _MSC_VER
@@ -27,7 +29,7 @@ typedef struct task_s
     void (*exec)(void *);
     size_t slice;
     size_t timer;
-    void *arg;
+    void *argv;
     int state;
 } task_s;
 
@@ -39,12 +41,18 @@ typedef struct task_s
 extern "C" {
 #endif /* __cplusplus */
 
-void task_exec(void);
 void task_tick(void);
-void task_ctor(task_s *ctx, void (*exec)(void *), void *arg, size_t slice);
+void task_exec(void);
+void task_cron(task_s *ctx, void (*exec)(void *), void *argv, size_t slice);
+void task_once(task_s *ctx, void (*exec)(void *), void *argv, size_t timer);
+void task_set_exec(task_s *ctx, void (*exec)(void *));
+void task_set_argv(task_s *ctx, void *argv);
+void task_set_timer(task_s *ctx, size_t timer);
+void task_set_slice(task_s *ctx, size_t slice);
 void task_add(task_s *ctx);
 void task_del(task_s *ctx);
 int task_exist(task_s *ctx);
+size_t task_timer(task_s *ctx);
 size_t task_slice(task_s *ctx);
 size_t task_count(void);
 
