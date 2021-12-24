@@ -21,8 +21,8 @@ void task_tick(void)
         {
             if (--task->timer == 0)
             {
-                task->state |= TASK_EXEC;
                 task->timer = task->slice;
+                task->state |= TASK_EXEC;
             }
         }
     }
@@ -36,8 +36,8 @@ void task_exec(void)
         task_current = list2_entry(node, task_s, list);
         if (task_current->state & TASK_EXEC)
         {
-            task_current->exec(task_current->argv);
             task_current->state &= ~TASK_EXEC;
+            task_current->exec(task_current->argv);
             if (task_current->state & TASK_ONCE)
             {
                 task_del(task_current);
