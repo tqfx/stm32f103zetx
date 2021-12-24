@@ -186,7 +186,9 @@ dmypy.json
 .mxproject
 
 # Keil
-*.lst
-MDK-ARM/*.uvguix.*
-MDK-ARM/DebugConfig
+MDK-ARM/EventRecorderStub.scvd
 MDK-ARM/stm32f103zetx
+MDK-ARM/DebugConfig
+MDK-ARM/RTE
+*.uvguix.*
+*.lst

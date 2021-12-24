@@ -64,12 +64,12 @@ void Error_Handler(void);
 #define KEY0_Pin GPIO_PIN_4
 #define KEY0_GPIO_Port GPIOE
 #define KEY0_EXTI_IRQn EXTI4_IRQn
-#define LED1_Pin GPIO_PIN_5
-#define LED1_GPIO_Port GPIOE
+#define LEDG_Pin GPIO_PIN_5
+#define LEDG_GPIO_Port GPIOE
 #define WKUP_Pin GPIO_PIN_0
 #define WKUP_GPIO_Port GPIOA
-#define LED0_Pin GPIO_PIN_5
-#define LED0_GPIO_Port GPIOB
+#define LEDR_Pin GPIO_PIN_5
+#define LEDR_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
