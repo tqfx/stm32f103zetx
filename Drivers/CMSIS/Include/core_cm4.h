@@ -229,7 +229,6 @@
 /*@} end of group Cortex_M4 */
 
 
-
 /*******************************************************************************
  *                 Register Abstraction
   Core Register contain:
@@ -1580,7 +1579,6 @@ typedef struct
 /*@} */
 
 
-
 /*******************************************************************************
  *                Hardware Abstraction Layer
   Core Function Interface contains:
@@ -1592,7 +1590,6 @@ typedef struct
 /**
   \defgroup CMSIS_Core_FunctionInterface Functions and Instructions Reference
 */
-
 
 
 /* ##########################   NVIC functions  #################################### */
@@ -1997,7 +1994,6 @@ __STATIC_INLINE uint32_t SCB_GetFPUType(void)
 /*@} end of CMSIS_Core_FpuFunctions */
 
 
-
 /* ##################################    SysTick function  ############################################ */
 /**
   \ingroup  CMSIS_Core_FunctionInterface
@@ -2038,7 +2034,6 @@ __STATIC_INLINE uint32_t SysTick_Config(uint32_t ticks)
 #endif
 
 /*@} end of CMSIS_Core_SysTickFunctions */
-
 
 
 /* ##################################### Debug In/Output function ########################################### */
@@ -2116,8 +2111,6 @@ __STATIC_INLINE int32_t ITM_CheckChar (void)
 }
 
 /*@} end of CMSIS_core_DebugFunctions */
-
-
 
 
 #ifdef __cplusplus

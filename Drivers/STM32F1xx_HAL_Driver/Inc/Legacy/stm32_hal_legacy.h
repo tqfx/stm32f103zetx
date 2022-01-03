@@ -1022,7 +1022,7 @@
 /**
   * @}
   */
-  
+
 /** @defgroup HAL_RTC_Aliased_Defines HAL RTC Aliased Defines maintained for legacy purpose
   * @{
   */
@@ -3780,4 +3780,3 @@
 #endif /* STM32_HAL_LEGACY */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
-

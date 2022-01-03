@@ -96,7 +96,6 @@
 #endif
 
 
-
 #if defined(__ARM_ARCH_6M__) && __ARM_ARCH_6M__==1
   #define __IAR_M0_FAMILY  1
 #elif defined(__ARM_ARCH_8M_BASE__) && __ARM_ARCH_8M_BASE__==1

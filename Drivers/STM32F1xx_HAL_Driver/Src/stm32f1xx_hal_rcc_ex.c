@@ -860,4 +860,3 @@ HAL_StatusTypeDef HAL_RCCEx_DisablePLL2(void)
   */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
-

@@ -203,7 +203,6 @@
 /*@} end of group ARMv8MBL */
 
 
-
 /*******************************************************************************
  *                 Register Abstraction
   Core Register contain:
@@ -1157,7 +1156,6 @@ typedef struct
 /*@} */
 
 
-
 /*******************************************************************************
  *                Hardware Abstraction Layer
   Core Function Interface contains:
@@ -1168,7 +1166,6 @@ typedef struct
 /**
   \defgroup CMSIS_Core_FunctionInterface Functions and Instructions Reference
 */
-
 
 
 /* ##########################   NVIC functions  #################################### */
@@ -1797,7 +1794,6 @@ __STATIC_INLINE uint32_t SCB_GetFPUType(void)
 /*@} end of CMSIS_Core_FpuFunctions */
 
 
-
 /* ##########################   SAU functions  #################################### */
 /**
   \ingroup  CMSIS_Core_FunctionInterface
@@ -1818,7 +1814,6 @@ __STATIC_INLINE void TZ_SAU_Enable(void)
 }
 
 
-
 /**
   \brief   Disable SAU
   \details Disables the Security Attribution Unit (SAU).
@@ -1831,8 +1826,6 @@ __STATIC_INLINE void TZ_SAU_Disable(void)
 #endif /* defined (__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE == 3U) */
 
 /*@} end of CMSIS_Core_SAUFunctions */
-
-
 
 
 /* ##################################    SysTick function  ############################################ */
@@ -1905,8 +1898,6 @@ __STATIC_INLINE uint32_t TZ_SysTick_Config_NS(uint32_t ticks)
 #endif
 
 /*@} end of CMSIS_Core_SysTickFunctions */
-
-
 
 
 #ifdef __cplusplus

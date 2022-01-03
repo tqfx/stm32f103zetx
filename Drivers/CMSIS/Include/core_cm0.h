@@ -61,7 +61,7 @@
  */
 
 #include "cmsis_version.h"
- 
+
 /*  CMSIS CM0 definitions */
 #define __CM0_CMSIS_VERSION_MAIN  (__CM_CMSIS_VERSION_MAIN)              /*!< \deprecated [31:16] CMSIS HAL main version */
 #define __CM0_CMSIS_VERSION_SUB   (__CM_CMSIS_VERSION_SUB)               /*!< \deprecated [15:0]  CMSIS HAL sub version */
@@ -170,7 +170,6 @@
 #define     __IOM    volatile            /*! Defines 'read / write' structure member permissions */
 
 /*@} end of group Cortex_M0 */
-
 
 
 /*******************************************************************************
@@ -544,7 +543,6 @@ typedef struct
 /*@} */
 
 
-
 /*******************************************************************************
  *                Hardware Abstraction Layer
   Core Function Interface contains:
@@ -555,7 +553,6 @@ typedef struct
 /**
   \defgroup CMSIS_Core_FunctionInterface Functions and Instructions Reference
 */
-
 
 
 /* ##########################   NVIC functions  #################################### */
@@ -817,7 +814,6 @@ __STATIC_INLINE void NVIC_DecodePriority (uint32_t Priority, uint32_t PriorityGr
 }
 
 
-
 /**
   \brief   Set Interrupt Vector
   \details Sets an interrupt vector in SRAM based interrupt vector table.
@@ -895,7 +891,6 @@ __STATIC_INLINE uint32_t SCB_GetFPUType(void)
 /*@} end of CMSIS_Core_FpuFunctions */
 
 
-
 /* ##################################    SysTick function  ############################################ */
 /**
   \ingroup  CMSIS_Core_FunctionInterface
@@ -936,8 +931,6 @@ __STATIC_INLINE uint32_t SysTick_Config(uint32_t ticks)
 #endif
 
 /*@} end of CMSIS_Core_SysTickFunctions */
-
-
 
 
 #ifdef __cplusplus

@@ -40,7 +40,7 @@
 
 /** @defgroup PWR_Exported_Types PWR Exported Types
   * @{
-  */ 
+  */
 
 /**
   * @brief  PWR PVD configuration structure definition
@@ -64,7 +64,7 @@ typedef struct
 
 /** @addtogroup PWR_Private_Constants
   * @{
-  */ 
+  */
 
 #define PWR_EXTI_LINE_PVD  ((uint32_t)0x00010000)  /*!< External interrupt line 16 Connected to the PVD EXTI Line */
 
@@ -72,12 +72,12 @@ typedef struct
   * @}
   */
 
- 
+
 /* Exported constants --------------------------------------------------------*/
 
 /** @defgroup PWR_Exported_Constants PWR Exported Constants
   * @{
-  */ 
+  */
 
 /** @defgroup PWR_PVD_detection_level PWR PVD detection level
   * @{
@@ -89,8 +89,8 @@ typedef struct
 #define PWR_PVDLEVEL_4                  PWR_CR_PLS_2V6
 #define PWR_PVDLEVEL_5                  PWR_CR_PLS_2V7
 #define PWR_PVDLEVEL_6                  PWR_CR_PLS_2V8
-#define PWR_PVDLEVEL_7                  PWR_CR_PLS_2V9 
-                                                          
+#define PWR_PVDLEVEL_7                  PWR_CR_PLS_2V9
+
 /**
   * @}
   */
@@ -204,7 +204,7 @@ typedef struct
 #define __HAL_PWR_PVD_EXTI_ENABLE_IT()      SET_BIT(EXTI->IMR, PWR_EXTI_LINE_PVD)
 
 /**
-  * @brief Disable interrupt on PVD Exti Line 16. 
+  * @brief Disable interrupt on PVD Exti Line 16.
   * @retval None.
   */
 #define __HAL_PWR_PVD_EXTI_DISABLE_IT()     CLEAR_BIT(EXTI->IMR, PWR_EXTI_LINE_PVD)
@@ -223,7 +223,7 @@ typedef struct
 
 
 /**
-  * @brief  PVD EXTI line configuration: set falling edge trigger.  
+  * @brief  PVD EXTI line configuration: set falling edge trigger.
   * @retval None.
   */
 #define __HAL_PWR_PVD_EXTI_ENABLE_FALLING_EDGE()  SET_BIT(EXTI->FTSR, PWR_EXTI_LINE_PVD)
@@ -263,7 +263,6 @@ typedef struct
 #define __HAL_PWR_PVD_EXTI_DISABLE_RISING_FALLING_EDGE()  __HAL_PWR_PVD_EXTI_DISABLE_RISING_EDGE();__HAL_PWR_PVD_EXTI_DISABLE_FALLING_EDGE();
 
 
-
 /**
   * @brief Check whether the specified PVD EXTI interrupt flag is set or not.
   * @retval EXTI PVD Line Status.
@@ -298,7 +297,7 @@ typedef struct
 #define IS_PWR_PVD_MODE(MODE) (((MODE) == PWR_PVD_MODE_IT_RISING)|| ((MODE) == PWR_PVD_MODE_IT_FALLING) || \
                               ((MODE) == PWR_PVD_MODE_IT_RISING_FALLING) || ((MODE) == PWR_PVD_MODE_EVENT_RISING) || \
                               ((MODE) == PWR_PVD_MODE_EVENT_FALLING) || ((MODE) == PWR_PVD_MODE_EVENT_RISING_FALLING) || \
-                              ((MODE) == PWR_PVD_MODE_NORMAL)) 
+                              ((MODE) == PWR_PVD_MODE_NORMAL))
 
 #define IS_PWR_WAKEUP_PIN(PIN) (((PIN) == PWR_WAKEUP_PIN1))
 
@@ -314,14 +313,13 @@ typedef struct
   */
 
 
-
 /* Exported functions --------------------------------------------------------*/
 
 /** @addtogroup PWR_Exported_Functions PWR Exported Functions
   * @{
   */
-  
-/** @addtogroup PWR_Exported_Functions_Group1 Initialization and de-initialization functions 
+
+/** @addtogroup PWR_Exported_Functions_Group1 Initialization and de-initialization functions
   * @{
   */
 
@@ -334,7 +332,7 @@ void HAL_PWR_DisableBkUpAccess(void);
   * @}
   */
 
-/** @addtogroup PWR_Exported_Functions_Group2 Peripheral Control functions 
+/** @addtogroup PWR_Exported_Functions_Group2 Peripheral Control functions
   * @{
   */
 
@@ -357,7 +355,6 @@ void HAL_PWR_EnableSleepOnExit(void);
 void HAL_PWR_DisableSleepOnExit(void);
 void HAL_PWR_EnableSEVOnPend(void);
 void HAL_PWR_DisableSEVOnPend(void);
-
 
 
 void HAL_PWR_PVD_IRQHandler(void);
